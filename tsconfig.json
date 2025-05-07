@@ -6,6 +6,12 @@
     "dom.iterable",
     "esnext"
   ],
+  
+    // ...
+    "strictNullChecks": true,
+    // ou habilite todo o modo estrito:
+    // "strict": true
+  
   "esModuleInterop": true,
   "module": "esnext",
   "moduleResolution": "node",
