@@ -24,6 +24,13 @@
       }
     ],
     "@typescript-eslint/no-unsafe-argument": "off"
-
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.spec.ts", "**/*.test.ts"],
+      "rules": {
+        "@typescript-eslint/unbound-method": "off"
+      }
+    }
+  ]
 }
