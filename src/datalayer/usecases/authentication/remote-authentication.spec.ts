@@ -2,6 +2,8 @@ import { mockAuthentication } from '@/domain/test/mock-authentication'
 import { HttpPostClientSpy } from '@/datalayer/test/mock-http-client'
 import { RemoteAuthentication } from './remote-authentication'
 import { faker } from '@faker-js/faker'
+import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials-error'
+import { HttpStatusCode } from '@/datalayer/protocols/http/http-response'
 
 type SutTypes = {
   sut: RemoteAuthentication
@@ -32,9 +34,18 @@ describe('RemoteAuthentication', () => {
     await sut.auth(authenticationParams)
     expect(httpPostClientSpy.body).toEqual(authenticationParams)
   })
+
+  test('Should throw InvalidCredentialsError if HttpPostClient returns 401', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.unathorized
+    }
+    const promise = sut.auth(mockAuthentication())
+    await expect(promise).rejects.toThrow(new InvalidCredentialsError())
+  })
 })
 
 /*
-  Sut (System Under Test) = Objeto testado da vez
-  Spy: Duble de test (test double) -> coloca valor fake na resposta dos metodos, e cria variaveis auxiliares para capturar valores e fazer comparações
+  # Sut (System Under Test) = Objeto testado da vez
+  # Spy: Duble de test (test double) -> coloca valor fake na resposta dos metodos, e cria variaveis auxiliares para capturar valores e fazer comparações
 */
