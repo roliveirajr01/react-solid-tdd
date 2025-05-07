@@ -6,6 +6,9 @@
   "scripts": {
     "prepare": "husky",
     "test": "jest --no-cache --passWithNoTests",
+    "test:watch": "npm test -- --watch",
+    "test:staged": "jest --findRelatedTests",
+    "test:ci": "npm test -- --coverage",
     "lint": "eslint src --ext .ts",
     "lint-staged": "lint-staged"
   },
