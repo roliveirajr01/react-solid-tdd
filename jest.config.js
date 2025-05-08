@@ -7,8 +7,13 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.scss$': 'identity-obj-proxy'
   },
   testPathIgnorePatterns: ['/node_modules/'],
-  passWithNoTests: true
+  passWithNoTests: true,
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "\\.d\\.ts$"
+  ]
 }
