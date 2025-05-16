@@ -1,52 +1,69 @@
-const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// webpack.config.js
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: './src/main/index.tsx',
+
   output: {
     path: path.join(__dirname, 'public/js'),
     publicPath: '/public/js',
-    fileName: 'bundle.js'
+    filename: 'bundle.js'
   },
+
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'scss'],
-    alias: {
-      '@': path.join(__dirname, 'src')
-    }
+    extensions: ['.ts', '.tsx', '.js', '.scss'],
+    alias: { '@': path.join(__dirname, 'src') }
   },
+
   module: {
-    rules: [{
-      test: /\.ts(x?)$/,
-      loader: 'ts-loader',
-      exclude: /node_modules/
-    }, {
-      test: /\.scss$/,
-      use: [{
-        loader: 'style-loader'
-      },
+    rules: [
+      // TS/TSX
       {
-        loader: 'css-loader',
-        options: {
-          modules: true
-        }
+        test: /\.ts(x?)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
       },
+      // CSS Modules (arquivos *.module.scss)
       {
-        loader: 'sass-loader'
+        test: /\.module\.s[ac]ss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { modules: true }   // **<-- Ativa CSS Modules aqui**
+          },
+          'sass-loader'
+        ]
+      },
+      // SCSS global
+      {
+        test: /\.s[ac]ss$/,
+        exclude: /\.module\.s[ac]ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
-    }]
   },
+
   devServer: {
-    contentBase: './public',
-    writeToDisk: true,
-    historyApiFallback: true
+    static: { directory: path.join(__dirname, 'public') },
+    devMiddleware: { writeToDisk: true },
+    historyApiFallback: true,
+    open: true
   },
+
   externals: {
     react: 'React',
-    'react-dom': 'ReactDom'
+    'react-dom': 'ReactDOM',
+    'react-dom/client': 'ReactDOM'
   },
+
   plugins: [
     new CleanWebpackPlugin()
   ]
-}
+};

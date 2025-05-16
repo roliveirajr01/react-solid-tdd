@@ -9,15 +9,13 @@
     "jsx": "react",
     "rootDir": "src",
     "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"]
-    },
+    "paths": { "@/*": ["*"] },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["node", "jest"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["node_modules", "public"]
 }
