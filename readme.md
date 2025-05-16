@@ -21,10 +21,10 @@ Um projeto de estudos que implementa as melhores práticas modernas de desenvolv
 - Mocks de API com MSW (Mock Service Worker)
 
 ### SOLID Implementation
-1. **Single Responsibility**: Componentes focados em única responsabilidade
-2. **Open/Closed**: Extensibilidade via composição
-3. **Liskov Substitution**: Interfaces consistentes
-4. **Interface Segregation**: APIs específicas por consumo
+1. Single Responsibility**: Componentes focados em única responsabilidade
+2. Open/Closed**: Extensibilidade via composição
+3. Liskov Substitution**: Interfaces consistentes
+4. Interface Segregation**: APIs específicas por consumo
 
 ### Design Patterns
 - **Factory**: Criação de objetos complexos
