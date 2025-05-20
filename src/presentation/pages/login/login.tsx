@@ -1,9 +1,10 @@
 import React from 'react';
-import Styles from './login-styles.module.scss';
+import styles from './login.module.scss';
 
 const Login: React.FC = () => {
+  console.log('000', styles)
   return (
-    <div className={Styles.login}>
+    <div className=''>
       <h1>TESTE</h1>
     </div>
   );

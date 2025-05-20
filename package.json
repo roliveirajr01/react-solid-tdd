@@ -42,6 +42,7 @@
     "lint-staged": "^13.3.0",
     "node-sass": "^9.0.0",
     "react-dom": "^19.1.0",
+    "sass": "^1.89.0",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
     "ts-jest": "^29.3.2",
