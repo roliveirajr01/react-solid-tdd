@@ -1,0 +1,6 @@
+@use "../../styles/_colors.scss" as c;
+
+.footer {
+  background-color: c.$primary;
+  height: 48px;
+}
