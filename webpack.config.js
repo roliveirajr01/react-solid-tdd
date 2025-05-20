@@ -13,16 +13,26 @@ module.exports = {
 
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.scss'],
-    alias: { '@': path.resolve(__dirname, 'src') },
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@styles': path.resolve(__dirname, 'src/presentation/styles')
+    }
   },
 
   module: {
     rules: [
       {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack']
+      },
+
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
+
       {
         test: /\.module\.s[ac]ss$/,
         use: [
@@ -33,34 +43,61 @@ module.exports = {
               esModule: false,
               modules: {
                 localIdentName: '[name]__[local]___[hash:base64:5]',
-                namedExport: false,
+                namedExport: false
               },
-              sourceMap: true,
-            },
+              sourceMap: true
+            }
           },
           {
             loader: 'sass-loader',
-            options: { sourceMap: true },
-          },
-        ],
+            options: {
+              sourceMap: true,
+              sassOptions: {
+                webpackImporter: true
+              }
+            }
+          }
+        ]
       },
+
       {
         test: /\.s[ac]ss$/,
         exclude: /\.module\.s[ac]ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              sassOptions: {
+                webpackImporter: true
+              }
+            }
+          }
+        ]
       },
-    ],
+
+      {
+        test: /\.(png|jpe?g|gif|ico)$/i,
+        type: 'asset/resource',
+        generator: { filename: 'assets/[name].[hash:8][ext]' }
+      }
+    ]
   },
+
   devServer: {
     static: { directory: path.join(__dirname, 'public') },
     devMiddleware: { writeToDisk: true },
     historyApiFallback: true,
-    open: true,
+    open: true
   },
+
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
-    'react-dom/client': 'ReactDOM',
+    'react-dom/client': 'ReactDOM'
   },
-  plugins: [new CleanWebpackPlugin()],
+
+  plugins: [ new CleanWebpackPlugin() ]
 };
