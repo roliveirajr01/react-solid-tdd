@@ -1,20 +1,5 @@
 @use "../../styles/_colors.scss" as c;
 
-body {
-  background: c.$background;
-}
-
-input[type="password"],
-input[type="email"] {
-  border: 1px solid c.$primaryLight;
-  line-height: 40px;
-  border-radius: 4px;
-  padding: 0 40px 0 8px;
-  &:focus {
-    outline-color: c.$primaryLight;
-  }
-}
-
 button {
   background-color: c.$primary;
   color: c.$white;
