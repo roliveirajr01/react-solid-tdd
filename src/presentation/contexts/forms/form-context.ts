@@ -1,15 +1,5 @@
 import React from 'react';
 
-export type FormContextProps = {
-  isLoading: boolean;
-  errorMessage: string
-};
-
-const defaultState: FormContextProps = {
-  isLoading: false,
-  errorMessage: ''
-};
-
-const FormContext = React.createContext<FormContextProps>(defaultState);
+const FormContext = React.createContext<any>(null);
 
 export default FormContext;
